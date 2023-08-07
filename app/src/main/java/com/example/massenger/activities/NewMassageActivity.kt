@@ -43,7 +43,7 @@ class NewMassageActivity : AppCompatActivity() {
         recyclerView.setHasFixedSize(true)
         recyclerView.adapter = adapter
 
-        db.child("user").addValueEventListener(object: ValueEventListener {
+        db.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val startTime = System.currentTimeMillis()
                 userList.clear()
@@ -52,6 +52,7 @@ class NewMassageActivity : AppCompatActivity() {
                     userList.add(currentuser!!)
                     Log.d("UserList", "done")
                 }
+                adapter.notifyDataSetChanged() // Notify the adapter about the data change
                 recyclerView.visibility = View.VISIBLE
                 for (user in userList) {
                     Log.d("UserList", "Username: ${user.username}, UID: ${user.uid}")
@@ -59,9 +60,9 @@ class NewMassageActivity : AppCompatActivity() {
                 val endTime = System.currentTimeMillis()
                 Log.d("UserList", "Time taken: ${endTime - startTime}ms")
             }
+
             override fun onCancelled(error: DatabaseError) {
                 Log.e("NewMassageActivity", "Database operation cancelled: ${error.message}")
-
             }
         })
 

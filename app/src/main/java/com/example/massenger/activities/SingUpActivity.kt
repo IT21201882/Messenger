@@ -132,15 +132,18 @@ class SingUpActivity : AppCompatActivity() {
 
     private fun uploadImageToFirebase() {
         val filename = UUID.randomUUID().toString()
-        val ref = FirebaseStorage.getInstance().getReference("/images/$filename")
+        val ref = FirebaseStorage.getInstance().getReference("/images")
 
         ref.putFile(uri!!)
-            .addOnSuccessListener {
-                Log.d("Register","Photo added:${it.metadata?.path}")
-                saveUserToFirebaseDatabse(it.toString())
+            .addOnSuccessListener { taskSnapshot ->
+                // Get the download URL of the uploaded image
+                ref.downloadUrl.addOnSuccessListener { uri ->
+                    // Call saveUserToFirebaseDatabse with the download URL
+                    saveUserToFirebaseDatabse(uri.toString())
+                }
             }
-            .addOnFailureListener{
-
+            .addOnFailureListener {
+                Log.e("Register", "Failed to upload photo: ${it.message}")
             }
     }
 
