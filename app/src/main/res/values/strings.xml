@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">ChatWith Me</string>
+    <string name="welcome_to_chatwithme">Welcome To ChatWithMe</string>
+    <string name="register">Register</string>
+    <string name="welcome_back">Welcome Back</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login_to_continue">Login To Continue</string>
+    <string name="hello_again">Hello Again</string>
+    <string name="create_new_account">Create New Account</string>
+    <string name="enter_user_name">Enter User Name</string>
+    <string name="enter_email">Enter Email</string>
+    <string name="enter_phone_number">Enter Phone Number</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="reg_btn">Register</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="sing_in">Sing In</string>
+    <string name="sing_up">Sing Up</string>
+    <string name="add_image">Add Image</string>
+    <string name="already_have_an_account">Already Have an account?</string>
+    <string name="select_photo">Select Photo</string>
+    <string name="menu_item1" />
+    <string name="menu_item2" />
+    <string name="Sign_Out">Sign Out</string>
+    <string name="New_Massenger">New Massenge</string>
+    <string name="Setting">Setting</string>
+    <string name="New_Massage">New Massage</string>
+</resources>
