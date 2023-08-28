@@ -11,8 +11,17 @@ import com.example.massenger.R
 import com.example.massenger.User
 import com.squareup.picasso.Picasso
 
-class newmassageview(val context: Context, var userList: ArrayList<User>) :
+class newmassageview(
+    val context: Context,
+    var userList: ArrayList<User>,
+    private val listener: OnItemClickListener
+) :
     RecyclerView.Adapter<newmassageview.UserViewHolder>() {
+
+    // Define the interface for the click listener
+    interface OnItemClickListener {
+        fun onItemClick(user: User)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         val view = LayoutInflater.from(context)
@@ -24,12 +33,14 @@ class newmassageview(val context: Context, var userList: ArrayList<User>) :
         val currentUser = userList[position]
         holder.userNameTextView.text = currentUser.username
 
-        // Load the user photo using Picasso
         Picasso.get()
             .load(currentUser.imageUri) // Use the "imageUri" property for the user photo URL
-            //.placeholder(R.drawable.placeholder_image) // Optional: show a placeholder image while loading
-            //.error(R.drawable.error_image) // Optional: show an error image if loading fails
             .into(holder.userImageView)
+
+        // Set click listener for each item
+        holder.itemView.setOnClickListener {
+            listener.onItemClick(currentUser)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -38,6 +49,6 @@ class newmassageview(val context: Context, var userList: ArrayList<User>) :
 
     class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val userNameTextView: TextView = itemView.findViewById(R.id.userNameTextView)
-        val userImageView: ImageView = itemView.findViewById(R.id.userImageView) // Add ImageView for user photo
+        val userImageView: ImageView = itemView.findViewById(R.id.userImageView)
     }
 }

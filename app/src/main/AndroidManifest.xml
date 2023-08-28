@@ -13,10 +13,14 @@
         android:theme="@style/Theme.Massenger"
         tools:targetApi="31">
         <activity
+            android:name=".activities.ChatActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.NewMassageActivity"
-            android:exported="false" >
-            <meta-data android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activities.latest_chatsActivity"/>
+            android:exported="false">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.latest_chatsActivity" />
         </activity>
         <activity
             android:name=".activities.latest_chatsActivity"

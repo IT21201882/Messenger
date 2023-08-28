@@ -82,7 +82,7 @@ class SingInActivity : AppCompatActivity() {
     private fun updateUI(user: FirebaseUser?) {
         if (user != null) {
             // User is signed in, navigate to the desired activity
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, NewMassageActivity::class.java)
             startActivity(intent)
             finish()
         } else {

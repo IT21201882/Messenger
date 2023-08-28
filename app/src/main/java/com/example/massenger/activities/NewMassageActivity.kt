@@ -1,8 +1,14 @@
 package com.example.massenger.activities
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,16 +21,15 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.squareup.picasso.Picasso
 
-
-class NewMassageActivity : AppCompatActivity() {
+class NewMassageActivity : AppCompatActivity(), newmassageview.OnItemClickListener {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var userList: ArrayList<User>
     private lateinit var adapter: newmassageview
     private lateinit var auth: FirebaseAuth
     private lateinit var db: DatabaseReference
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +41,7 @@ class NewMassageActivity : AppCompatActivity() {
         db = FirebaseDatabase.getInstance().getReference("user")
 
         userList = ArrayList()
-        adapter = newmassageview(this,userList)
+        adapter = newmassageview(this, userList, this) // Pass the activity as the listener
 
         recyclerView = findViewById(R.id.Recyclerview)
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -65,8 +70,11 @@ class NewMassageActivity : AppCompatActivity() {
                 Log.e("NewMassageActivity", "Database operation cancelled: ${error.message}")
             }
         })
+    }
 
-  }
+    override fun onItemClick(user: User) {
+        val intent = Intent(this, ChatActivity::class.java)
+        intent.putExtra("user_id", user.uid)
+        startActivity(intent)
+    }
 }
-
-
