@@ -18,7 +18,7 @@ class newmassageview(
 ) :
     RecyclerView.Adapter<newmassageview.UserViewHolder>() {
 
-    // Define the interface for the click listener
+
     interface OnItemClickListener {
         fun onItemClick(user: User)
     }
